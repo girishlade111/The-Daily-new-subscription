@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Chronicle - Your Source for Unbiased News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .brand-logo {
+            font-weight: 900;
+            font-size: 1.75rem;
+            letter-spacing: -0.5px;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #007bff;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://placehold.co/1600x800/333/fff?text=Breaking+News') no-repeat center center/cover;
+        }
+        .card, .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover, .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag-world { background-color: #007bff; color: white; }
+        .tag-politics { background-color: #dc3545; color: white; }
+        .tag-business { background-color: #28a745; color: white; }
+        .tag-tech { background-color: #17a2b8; color: white; }
+        .tag-culture { background-color: #ffc107; color: #333; }
+        .footer {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .popular-badge {
+            transform: rotate(45deg);
+            right: -65px;
+            top: 20px;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #2563eb; }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        /* Tab Styles */
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Page Container -->
+    <div id="landingPage">
+        <!-- Header -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <div class="brand-logo text-gray-800"><a href="#" onclick="showLandingPage()">The Daily Chronicle</a></div>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="#" class="nav-link text-gray-600 font-semibold">Home</a>
+                        <a href="#" class="nav-link text-gray-600">World</a>
+                        <a href="#" class="nav-link text-gray-600">Politics</a>
+                        <a href="#" class="nav-link text-gray-600">Business</a>
+                        <a href="#" class="nav-link text-gray-600">Technology</a>
+                        <a href="#" class="nav-link text-gray-600">Culture</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-blue-500"><i class="fas fa-search"></i></button>
+                        <button id="subscribeBtnHeader" class="subscribe-link bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">Subscribe</button>
+                        <button class="md:hidden text-gray-600 text-2xl"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Hero Section -->
+            <section class="hero-section text-white rounded-lg p-8 md:p-16 mb-12 flex items-end">
+                <div>
+                    <span class="tag tag-politics mb-2">Politics</span>
+                    <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">Parliament Passes Landmark 'Digital India 2.0' Act to Boost Tech Infrastructure</h1>
+                    <p class="text-lg md:text-xl mb-6 max-w-3xl">The new legislation aims to expand high-speed internet to rural areas and promote digital literacy nationwide, marking a significant step in India's tech journey.</p>
+                    <a href="#" class="bg-white text-blue-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200 transition duration-300">Read More &rarr;</a>
+                </div>
+            </section>
+            
+            <!-- News Section with Tabs -->
+            <section>
+                <div class="border-b border-gray-200 mb-6">
+                    <nav class="flex space-x-4 sm:space-x-8 -mb-px" aria-label="Tabs">
+                        <button data-tab="world" class="tab-button active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">World</button>
+                        <button data-tab="politics" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Politics</button>
+                        <button data-tab="business" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Business</button>
+                        <button data-tab="technology" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Technology</button>
+                        <button data-tab="culture" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Culture</button>
+                    </nav>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="tab-content">
+                    <!-- World News -->
+                    <div id="world" class="tab-pane active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Sample articles. In a real app, these would be dynamically loaded. -->
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/007bff/fff?text=G20+Summit" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">G20 Leaders Conclude Summit in Rio with Climate and Trade Pacts</h3>
+                                <p class="text-gray-600 text-sm">A new agreement targets plastics pollution while trade talks focus on reducing tariffs on green technologies.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/007bff/fff?text=BRICS+News" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">BRICS Nations Announce New Development Bank for Infrastructure Projects</h3>
+                                <p class="text-gray-600 text-sm">The focus will be on funding sustainable energy and transport projects across member nations.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                             <img src="https://placehold.co/600x400/007bff/fff?text=Global+Economy" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Global Economic Forum Warns of Inflation Risks Amidst Supply Chain Issues</h3>
+                                <p class="text-gray-600 text-sm">Experts urge central banks to coordinate policies to prevent a global slowdown.</p>
+                            </div>
+                        </div>
+                        <!-- Add more world news cards here to reach 15-20 -->
+                    </div>
+                    <!-- Politics News -->
+                    <div id="politics" class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/dc3545/fff?text=State+Elections" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Maharashtra and Haryana Gear Up for Tightly Contested Assembly Elections</h3>
+                                <p class="text-gray-600 text-sm">Political parties launch major campaigns as voter turnout is expected to be at an all-time high.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/dc3545/fff?text=New+Policy" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Government Unveils National Health Scheme for Universal Coverage</h3>
+                                <p class="text-gray-600 text-sm">The new scheme aims to provide affordable healthcare to all citizens, with a focus on rural areas.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/dc3545/fff?text=Parliament" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Monsoon Session of Parliament to Debate New Data Protection Bill</h3>
+                                <p class="text-gray-600 text-sm">The bill proposes strict regulations on how companies collect and use citizen data.</p>
+                            </div>
+                        </div>
+                         <!-- Add more politics news cards here -->
+                    </div>
+                    <!-- Business News -->
+                    <div id="business" class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/28a745/fff?text=Sensex+High" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Sensex Crosses 80,000 Mark as IT and Banking Stocks Surge</h3>
+                                <p class="text-gray-600 text-sm">Investor confidence is high following strong corporate earnings and positive global cues.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/28a745/fff?text=RBI+Policy" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">RBI Holds Interest Rates Steady, Cites Inflation Concerns</h3>
+                                <p class="text-gray-600 text-sm">The Monetary Policy Committee has adopted a "wait and watch" approach for the next quarter.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/28a745/fff?text=Startup+IPO" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Indian E-commerce Giant 'ShopKart' Files for $2 Billion IPO</h3>
+                                <p class="text-gray-600 text-sm">This is set to be one of the largest public offerings in the Indian startup ecosystem.</p>
+                            </div>
+                        </div>
+                        <!-- Add more business news cards here -->
+                    </div>
+                    <!-- Technology News -->
+                    <div id="technology" class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/17a2b8/fff?text=ISRO+Mission" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">ISRO Announces Gaganyaan Mission's First Unmanned Flight for December</h3>
+                                <p class="text-gray-600 text-sm">The mission is a crucial step towards India's goal of sending astronauts to space.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/17a2b8/fff?text=5G+Rollout" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">5G Network Now Live in 50 More Tier-2 Indian Cities</h3>
+                                <p class="text-gray-600 text-sm">Telecom operators are rapidly expanding next-gen connectivity across the country.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/17a2b8/fff?text=AI+Regulation" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">India Proposes New AI Framework Focused on Ethics and Safety</h3>
+                                <p class="text-gray-600 text-sm">The framework aims to balance innovation with responsible development of artificial intelligence.</p>
+                            </div>
+                        </div>
+                        <!-- Add more tech news cards here -->
+                    </div>
+                    <!-- Culture News -->
+                    <div id="culture" class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/ffc107/333?text=Bollywood+Hit" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Shah Rukh Khan's 'Pathaan 2' Breaks Box Office Records on Opening Weekend</h3>
+                                <p class="text-gray-600 text-sm">The action-thriller has become the fastest Indian film to cross the ₹200 crore mark.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/ffc107/333?text=OTT+Series" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">New Web Series 'Mumbai Metro' Garners Critical Acclaim for its Gritty Realism</h3>
+                                <p class="text-gray-600 text-sm">The show explores the lives of people commuting in India's financial capital.</p>
+                            </div>
+                        </div>
+                        <div class="card bg-white rounded-lg overflow-hidden shadow">
+                            <img src="https://placehold.co/600x400/ffc107/333?text=Literary+Prize" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Author Arundhati Roy Wins Prestigious International Literary Award for New Novel</h3>
+                                <p class="text-gray-600 text-sm">Her latest work has been praised for its powerful prose and compelling narrative.</p>
+                            </div>
+                        </div>
+                        <!-- Add more culture news cards here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-12 pt-12 pb-8">
+            <div class="container mx-auto px-4 text-center">
+                 <p>&copy; 2025 The Daily Chronicle. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Subscription Page Container -->
+    <div id="subscriptionPage" class="hidden">
+        <!-- Subscription page content remains the same -->
+        <header class="bg-white shadow-sm">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <div class="brand-logo text-gray-800"><a href="#">The Daily Chronicle</a></div>
+                    <nav class="flex items-center space-x-4">
+                        <button id="backToMainBtn" class="text-gray-600 hover:text-blue-600">Back to Main Site</button>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">Login</button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="container mx-auto px-4 py-12 md:py-20">
+            <section class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Choose the Plan That's Right for You</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Stay informed with our flexible subscription plans. Unbiased news, in-depth analysis, and more.</p>
+                <div class="mt-8 flex justify-center items-center space-x-4">
+                    <span class="font-semibold text-gray-700">Monthly</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="billing-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="font-semibold text-gray-500">Yearly (Save 20%)</span>
+                </div>
+            </section>
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="pricing-card bg-white rounded-lg p-8 flex flex-col border">
+                    <h3 class="text-2xl font-bold text-gray-800">Basic</h3>
+                    <p class="text-gray-500 mb-6">For the casual reader.</p>
+                    <div class="mb-6">
+                        <span class="price text-4xl font-extrabold text-gray-900" data-monthly="$9" data-yearly="$86">$9</span>
+                        <span class="period text-gray-500" data-monthly="/month" data-yearly="/year">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-gray-600 mb-8 flex-grow">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Access to daily news</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Web & mobile access</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Limited article archive</li>
+                    </ul>
+                    <button class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition duration-300">Choose Basic</button>
+                </div>
+                <div class="pricing-card bg-white rounded-lg p-8 flex flex-col relative overflow-hidden border-2 border-blue-600">
+                    <div class="popular-badge absolute w-40 text-center bg-blue-600 text-white font-semibold py-1 text-sm">Most Popular</div>
+                    <h3 class="text-2xl font-bold text-blue-600">Pro</h3>
+                    <p class="text-gray-500 mb-6">For the dedicated news follower.</p>
+                    <div class="mb-6">
+                        <span class="price text-4xl font-extrabold text-gray-900" data-monthly="$19" data-yearly="$182">$19</span>
+                        <span class="period text-gray-500" data-monthly="/month" data-yearly="/year">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-gray-600 mb-8 flex-grow">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Everything in Basic</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Ad-free experience</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Unlimited article archive</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Exclusive newsletters</li>
+                    </ul>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Choose Pro</button>
+                </div>
+                <div class="pricing-card bg-white rounded-lg p-8 flex flex-col border">
+                    <h3 class="text-2xl font-bold text-gray-800">Ultimate</h3>
+                    <p class="text-gray-500 mb-6">For the news professional.</p>
+                    <div class="mb-6">
+                        <span class="price text-4xl font-extrabold text-gray-900" data-monthly="$39" data-yearly="$374">$39</span>
+                        <span class="period text-gray-500" data-monthly="/month" data-yearly="/year">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-gray-600 mb-8 flex-grow">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Everything in Pro</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>In-depth market analysis</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Access to special reports</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Early access to features</li>
+                    </ul>
+                    <button class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition duration-300">Choose Ultimate</button>
+                </div>
+                <div class="pricing-card bg-gray-800 text-white rounded-lg p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold">Industry</h3>
+                    <p class="text-gray-400 mb-6">For teams and organizations.</p>
+                    <div class="mb-6"><span class="text-4xl font-extrabold">Custom</span></div>
+                    <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3"></i>Multi-user licenses</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3"></i>Content API access</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3"></i>Dedicated account manager</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3"></i>Advanced analytics</li>
+                    </ul>
+                    <button class="w-full bg-white hover:bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg transition duration-300">Contact Sales</button>
+                </div>
+            </section>
+        </main>
+        <footer class="footer mt-12 pt-12 pb-8">
+            <div class="container mx-auto px-4 text-center">
+                <p class="text-gray-400">&copy; 2025 The Daily Chronicle. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- Page Navigation and Setup ---
+        const landingPage = document.getElementById('landingPage');
+        const subscriptionPage = document.getElementById('subscriptionPage');
+        const subscribeBtn = document.getElementById('subscribeBtnHeader');
+        const backToMainBtn = document.getElementById('backToMainBtn');
+
+        function showSubscriptionPage() {
+            landingPage.classList.add('hidden');
+            subscriptionPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showLandingPage() {
+            subscriptionPage.classList.add('hidden');
+            landingPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        subscribeBtn.addEventListener('click', showSubscriptionPage);
+        backToMainBtn.addEventListener('click', showLandingPage);
+        
+        // --- Landing Page Tab Logic ---
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Deactivate all buttons and panes
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.add('hidden'));
+                
+                // Activate clicked button and corresponding pane
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+
+        // --- Subscription Page Logic ---
+        const toggle = document.getElementById('billing-toggle');
+        if (toggle) {
+            const prices = subscriptionPage.querySelectorAll('.price');
+            const periods = subscriptionPage.querySelectorAll('.period');
+            
+            toggle.addEventListener('change', function() {
+                const isYearly = this.checked;
+                prices.forEach(price => {
+                    price.textContent = isYearly ? price.dataset.yearly : price.dataset.monthly;
+                });
+                periods.forEach(period => {
+                    period.textContent = isYearly ? period.dataset.yearly : period.dataset.monthly;
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
